@@ -1,0 +1,4 @@
+* text=auto eol=lf
+
+# Preserve the historical embedded TSV exactly, including empty trailing cells.
+case-studies/dread-delusion/web-prompts/01_COMPACT_CORE_RULEBOOK.txt whitespace=-trailing-space

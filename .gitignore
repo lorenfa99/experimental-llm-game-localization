@@ -1,0 +1,22 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+dist/
+build/
+*.egg-info/
+.env
+
+# Real localization projects may contain copyrighted material.
+projects/*/input/
+projects/*/release/
+projects/*/work/
+projects/*/reports/
+projects/*/package/
+
+# Generated files in the synthetic example.
+examples/synthetic/release/
+examples/synthetic/work/MANIFEST.tsv
+examples/synthetic/work/INPUT_SHA256.tsv
+examples/synthetic/reports/*.tsv
+examples/synthetic/reports/*.md

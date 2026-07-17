@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "experimental-llm-game-localization"
+version = "0.1.0"
+description = "Deterministic orchestration and QA for human-reviewed LLM-assisted game localization"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Lorenzo" }]
+keywords = ["localization", "video-games", "llm", "quality-assurance", "translation"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Topic :: Software Development :: Internationalization",
+]
+dependencies = []
+
+[project.scripts]
+locpipe = "locpipe.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

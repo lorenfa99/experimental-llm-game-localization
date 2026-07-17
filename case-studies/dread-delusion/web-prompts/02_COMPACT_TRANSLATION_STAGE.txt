@@ -1,0 +1,317 @@
+DREAD DELUSION — BLOCKWISE INDEPENDENT TRANSLATION STAGE v11.0
+
+PURPOSE
+
+Produce one independent premium Italian translation using exactly one active
+profile.
+
+All hard rules come from:
+
+01_COMPACT_CORE_RULEBOOK.txt
+glossario.txt
+TASK_FILE_ADDENDUM.txt
+
+Do not read any other Italian candidate.
+
+SUPPORTED COMMANDS
+
+Traduzione A <source file>
+Traduzione B <source file>
+Traduzione C <source file>
+Traduzione D <source file>
+Traduzione E <source file>
+
+PROFILE ROUTING
+
+A = BALANCED
+B = SEMANTIC
+C = NATURAL SPOKEN ITALIAN
+D = VOICE AND RHETORIC
+E = CONSERVATIVE AND TECHNICAL
+
+OUTPUT BASENAMES
+
+A: <source_stem>_IT_A_BALANCED.txt
+B: <source_stem>_IT_B_SEMANTIC.txt
+C: <source_stem>_IT_C_NATURAL.txt
+D: <source_stem>_IT_D_VOICE.txt
+E: <source_stem>_IT_E_CONSERVATIVE.txt
+
+OUTPUT POLICY
+
+Produce exactly one user-facing TXT.
+
+Do not produce a QA audit, report, rationale, or candidate table.
+
+PREPARATION
+
+Use the universal block-processing contract.
+
+Before splitting:
+
+1. detect and record the source schema under the core rulebook;
+2. resolve the exact TARGET_TEXT field or coordinated TARGET_TEXT fields;
+3. apply any matching classification and scope in TASK_FILE_ADDENDUM.txt;
+4. resolve any exact start anchor and include the anchor row;
+5. lock all rows outside ACTIVE_SCOPE;
+6. create the manifest using physical line number as the primary row key;
+7. generate the source-signal watchlist, including task parents and stage
+   chains for task sources, title/author/series signals for book sources, and
+   item IDs, variant tiers, repeated names, and repeated mechanics for item
+   sources, and string IDs, title/body pairs, numbered sequences, runtime
+   fragments, placeholders, control labels, and repeated UI formulas for
+   UI/system/general-string sources.
+
+Split the source into exact physical-line blocks.
+
+Schema limits:
+
+- dialogue, task, UI, system, tutorial, subtitle, sign, map, notification, and
+  general-string tables: at most 10 non-empty in-scope TARGET_ROW entries and
+  12,000 characters;
+- book and document tables: exactly one active physical data row per block,
+  with title and body kept together and no character-based splitting;
+- item, inventory, and catalogue tables: at most 5 active physical item rows
+  and 12,000 characters, with every selected Name/Description variant from one
+  row kept together and never split.
+
+Create the manifest, source-signal watchlist, and temporary block workspace
+with deterministic tools. Confirm preparation passes before editorial work begins.
+
+FIRST SWEEP — TRANSLATE EVERY BLOCK
+
+Process blocks strictly in manifest order.
+
+For each current block:
+
+1. read the current source block;
+2. read the immediately previous and next source blocks only as context;
+3. reconstruct every non-empty in-scope TARGET_ROW:
+   - for dialogue: speaker, addressee, literal and pragmatic meaning, voice,
+     register, rhetoric, and oral rhythm;
+   - for task or journal text: title or stage function, current state, completed
+     action, remaining objective, player instruction, parent-task progression,
+     modality, certainty, aspect, and consequence;
+   - for book or document text: title-body relationship, genre, authorial or
+     narrative voice, point of view, intended reader, chronology, paragraph and
+     verse structure, quoted voices, rhetoric, ideology, satire, and deliberate
+     orthographic characterization;
+   - for item, inventory, or catalogue text: item family, variant tier, concise
+     UI name, gameplay effect, limitation, stat or skill terminology, upgrade
+     relationship, repeated mechanical formula, lore segment, humor, and
+     name-description consistency across the whole physical row;
+   - for UI, system, tutorial, subtitle, sign, map, notification, or general
+     text: screen and gameplay function, label or message type, paired title/body
+     context, numbered-sequence continuity, runtime-fragment grammar, direct
+     player address, capitalization, placeholder placement, and diegetic voice;
+   - for every schema: gameplay function, motivation, intensity, humor,
+     metaphor, rituality, repetition, wordplay, and protected markers;
+4. generate the Italian translation independently;
+5. apply the active profile only as a tie-breaker between already faithful,
+   natural, and technically valid solutions;
+6. preserve every structural rule;
+7. write the translated block;
+8. validate the block before continuing.
+
+Do not defer difficult lines to a later stage.
+
+INTERNAL PROPOSAL DEPTH
+
+Simple low-risk row:
+
+- one carefully checked solution.
+
+Medium-risk row:
+
+- at least two genuinely different internal strategies.
+
+Humor, insult, metaphor, ritual language, wordplay, deliberate repetition,
+marked rhythm, ambiguity, or long syntax:
+
+- at least three genuinely different strategies;
+- include a functional recreation when literal transfer would weaken the
+  effect.
+
+Do not output rejected alternatives.
+
+MANDATORY SECOND SWEEP — MISSING-ISSUE SEARCH
+
+After all first-sweep blocks pass:
+
+1. assemble the provisional complete translation;
+2. build a cross-block index for:
+   - repeated exact English lines;
+   - repeated and related formulas;
+   - glossary terms;
+   - speaker and faction groups;
+   - task-parent groups, stage progression, and recurring journal formulas;
+   - book series, authors, bylines, titles, document formulas, and recurring
+     literary or historical terminology;
+   - item families, rarity and material tiers, repeated base descriptions,
+     gameplay-stat formulas, upgrade wording, and recurring UI terminology;
+   - UI and system labels, control names, title/body and _T/body pairs,
+     numbered sequences, intro subtitles, runtime fragments, placeholders, and
+     recurring confirmation, notification, tutorial, map, and status formulas;
+   - tutorial formulas;
+   - recurring jokes, metaphors, and rhetorical structures;
+3. revisit every block in manifest order;
+4. compare each source block with its provisional Italian block;
+5. actively search for:
+   - omissions or additions;
+   - altered motivation, modality, certainty, aspect, or intensity;
+   - calques;
+   - weak collocations;
+   - translated syntax;
+   - generic wording;
+   - voice drift;
+   - weakened rhetoric or rhythm;
+   - lost humor, metaphor, repetition, or wordplay;
+   - unclear item mechanics, weak UI names, or inconsistent variant tiers;
+   - verbose or inconsistent UI labels, broken title/body relationships,
+     discontinuous numbered sequences, damaged placeholders, or fragments that
+     no longer combine correctly at runtime;
+   - inconsistencies across blocks;
+6. improve any line for which a stronger justified solution exists;
+7. validate every changed block again.
+
+The second sweep must inspect all blocks.
+
+Do not stop because the first sweep passed technical checks.
+
+FINAL QA
+
+Reassemble the complete candidate.
+
+Run deterministic validation for:
+
+- exact physical-line count, order, source encoding, and line endings;
+- exact schema and all resolved TARGET_TEXT fields;
+- exact active start scope and byte-identical rows before the anchor;
+- physical row keys, IDs, parents when present, and sequence;
+- the source pipe count and pipe positions on every corresponding row, with no
+  fixed pipe count imported from another schema;
+- byte-identical non-target fields and unchanged separators between selected target fields;
+- columns and empty fields;
+- protected markers and boundaries;
+- numeric tokens and approximation;
+- glossary and capitalization;
+- schema-appropriate address: dialogue Voi, narrator/task Tu, source-defined
+  book/document person and register, and singular Tu for item, UI, system,
+  tutorial, and notification text only when directly addressing the player;
+- unchanged empty and literal null item cells;
+- consistent item names, tiers, mechanics, numbers, percentages, and comparative
+  modifiers across coordinated variants;
+- exact runtime placeholders and correct assembly of paired, sequential, and
+  composable UI/system strings;
+- whitespace and duplicate spaces.
+
+Also run a final objective grammar check.
+
+Do not begin a third broad stylistic pass.
+
+FINAL RESPONSE
+
+Return only:
+
+- the complete translated TXT;
+- one concise sentence confirming completion of both block sweeps and final QA.
+
+Then stop.
+
+================================================================================
+PROFILE A — BALANCED
+================================================================================
+
+Choose the strongest overall localization.
+
+Tie-break order:
+
+1. semantic fidelity;
+2. native Italian;
+3. schema-appropriate speaker, authorial, document, item, or interface voice;
+4. rhetoric, rhythm, and UI clarity;
+5. concision.
+
+Avoid blandness, unnecessary creativity, over-literary phrasing, and mechanical
+literalism.
+
+================================================================================
+PROFILE B — SEMANTIC
+================================================================================
+
+Among natural solutions, preserve the finest source distinctions:
+
+- agent and recipient;
+- motivation;
+- cause and purpose;
+- modality and obligation;
+- certainty and uncertainty;
+- aspect;
+- intensity;
+- economic interest;
+- gameplay function;
+- source-supported vulgarity.
+
+Do not preserve English syntax when Italian can express the same meaning
+naturally.
+
+================================================================================
+PROFILE C — NATURAL SPOKEN ITALIAN
+================================================================================
+
+Among equally faithful solutions, prefer Italian that sounds originally
+written for the source medium, including natural spoken dialogue, natural
+published prose, concise native item-interface text, and natural UI/system text.
+
+Focus on:
+
+- idiomatic collocations;
+- natural information order;
+- oral rhythm;
+- concise verbs;
+- believable questions, offers, commands, and threats;
+- removal of translation smell.
+
+Do not paraphrase away meaning or flatten deliberate repetition.
+
+================================================================================
+PROFILE D — VOICE AND RHETORIC
+================================================================================
+
+Among equally faithful and natural solutions, preserve:
+
+- faction, authorial, document, item, and diegetic interface register;
+- individual personality, narrative persona, item-family tone, or system-text function;
+- formality and contempt;
+- ritual language;
+- humor and insults;
+- hesitation;
+- metaphor;
+- repetition;
+- wordplay;
+- marked rhythm.
+
+Do not invent characterization or unsupported vulgarity.
+
+================================================================================
+PROFILE E — CONSERVATIVE AND TECHNICAL
+================================================================================
+
+Among equally strong solutions, prefer the lowest-risk defensible wording.
+
+Focus on:
+
+- no additions or omissions;
+- glossary and capitalization;
+- marker boundaries;
+- numbers and approximation;
+- antecedents;
+- schema-appropriate Tu/Voi;
+- masculine-singular agreement;
+- recurring terminology;
+- exact item mechanics, tier relationships, empty cells, and literal null
+  sentinels;
+- exact UI placeholders, paired-string relationships, sequence order, and
+  runtime-fragment compatibility.
+
+Do not become stiff or mechanically literal.

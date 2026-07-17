@@ -1,0 +1,599 @@
+DREAD DELUSION — BLOCKWISE ADJUDICATION AND TWO FULL REVISIONS v11.0
+
+All stages obey:
+
+01_COMPACT_CORE_RULEBOOK.txt
+glossario.txt
+TASK_FILE_ADDENDUM.txt
+
+Every stage uses schema-resolved blocks:
+
+- dialogue, task, UI, system, tutorial, subtitle, sign, map, notification, and
+  general-string tables: at most 10 non-empty target rows and 12,000 Unicode
+  characters;
+- book and document tables: exactly one active physical data row per block,
+  with all selected title/body fields kept together and never split;
+- item, inventory, and catalogue tables: at most 5 active physical item rows
+  and 12,000 Unicode characters, with every selected Name/Description variant
+  from one row kept together and never split.
+
+Every stage performs:
+
+- a complete first block sweep;
+- assembly;
+- a mandatory complete second block sweep;
+- final assembly;
+- deterministic technical QA.
+
+Temporary blocks and internal analysis are not user-facing outputs.
+
+================================================================================
+STAGE A — BLOCKWISE ADJUDICATION
+================================================================================
+
+USER COMMAND
+
+Adjudica <source file>
+
+REQUIRED INPUTS
+
+- English source;
+- exactly five structurally aligned Italian candidate TXT files;
+- glossario.txt;
+- shared rules.
+
+Do not use profile names as evidence of quality.
+
+The English source is authoritative.
+
+Majority agreement is not proof.
+
+OUTPUT POLICY
+
+Produce exactly one user-facing file:
+
+<source_stem>_IT_ENSEMBLE.txt
+
+Do not produce a decision matrix, report, audit, rationale file, or statistics.
+
+PREPARATION
+
+Split the English source and all five candidates with one shared manifest.
+
+Assign fixed neutral aliases C1–C5 before editorial comparison.
+
+FIRST SWEEP — ADJUDICATE EVERY BLOCK
+
+Process blocks strictly in manifest order.
+
+For the current block, read:
+
+- current English block;
+- matching current C1–C5 blocks;
+- immediately previous and next English blocks as read-only context;
+- previous and next candidate blocks only when dialogue, book-series,
+  item-family, UI title/body, numbered-sequence, subtitle, or runtime-fragment
+  continuity requires it.
+
+For every non-empty schema-selected target cell:
+
+For book rows, assess the title and body together before finalizing either cell.
+
+For item rows, assess all selected Name/Description variants as one coordinated
+item family before finalizing any cell.
+
+For UI/system/general-string rows, assess paired title/body entries, numbered
+sequences, subtitles, and runtime fragments with their coordinated context
+before finalizing the current cell.
+
+1. reconstruct source meaning and gameplay function before choosing;
+2. assess every candidate for:
+   - semantic fidelity;
+   - omissions and additions;
+   - motivation, modality, certainty, aspect, and intensity;
+   - native Italian naturalness;
+   - grammar and collocation;
+   - speaker, faction, authorial, and document voice;
+   - register;
+   - rhetoric and oral rhythm;
+   - humor, insult, metaphor, rituality, repetition, and wordplay;
+   - glossary and technical safety;
+3. reject invalid candidates before comparing style;
+4. select the strongest valid candidate;
+5. create an independent synthesis when no candidate is strongest as written;
+6. never choose by vote, average wording, or profile label;
+7. write the provisional ensemble block;
+8. validate the block before continuing.
+
+For high-risk semantics, ambiguity, humor, metaphor, insult, ritual language,
+repetition, wordplay, or marked rhythm, generate multiple internal synthesis
+strategies when candidate selection is insufficient.
+
+MANDATORY SECOND SWEEP — SOURCE-FIRST ENSEMBLE CHALLENGE
+
+After all provisional blocks pass:
+
+1. assemble the provisional ENSEMBLE;
+2. build the cross-block consistency index;
+3. revisit every block in manifest order;
+4. for every non-empty row, derive an independent source-first challenger not
+   restricted to C1–C5;
+5. compare provisional ensemble and challenger without status-quo preference;
+6. retain the stronger version or create a stronger synthesis;
+7. inspect:
+   - repeated source phrases;
+   - glossary terms;
+   - speaker, faction, authorial, and document voice;
+   - connected exchanges;
+   - tutorial formulas;
+   - book series, titles, bylines, title-body consistency, and document voice;
+   - item families, variant tiers, repeated mechanics, UI naming, and
+     name-description consistency;
+   - UI labels and commands, title/body pairs, numbered sequences, subtitles,
+     runtime fragments, placeholders, and recurring system formulas;
+   - humor;
+   - metaphor;
+   - repetition;
+   - wordplay;
+   - cross-block consistency;
+8. save and validate every corrected block.
+
+The second sweep must review every block.
+
+FINAL QA
+
+Reassemble and validate the complete ENSEMBLE.
+
+Return only:
+
+- the downloadable ENSEMBLE.txt;
+- one concise sentence confirming both block sweeps and final QA.
+
+Then stop.
+
+================================================================================
+STAGE B — R1 EXPANSIVE EDITORIAL REVISION
+================================================================================
+
+USER COMMANDS
+
+Revisione 1 <ensemble file>
+
+or:
+
+R1 <ensemble file>
+
+REQUIRED INPUTS
+
+- English source;
+- named Italian ENSEMBLE;
+- glossario.txt;
+- shared rules.
+
+DO NOT OPEN
+
+- candidate translations A–E;
+- ensemble decision material;
+- reports or audits;
+- previous R1 or FINAL files;
+- external correction lists.
+
+ROLE
+
+Act as a senior Italian narrative localization editor performing an expansive
+developmental revision.
+
+The objective is not to preserve the ensemble.
+
+The objective is to produce a materially stronger complete Italian
+localization.
+
+OUTPUT POLICY
+
+Produce exactly one user-facing file:
+
+<source_stem>_IT_R1.txt
+
+Do not produce a critique, matrix, report, audit, rationale file, change log, or
+statistics.
+
+EDITING FREEDOM
+
+You may rewrite any schema-selected target cell.
+
+Do not optimize for minimal changes.
+
+Do not treat a high edit count as a failure.
+
+Changing many rows is acceptable and often expected when it improves the
+localization.
+
+Do not rewrite a line solely to be different.
+
+FIRST SWEEP — EXPANSIVE SOURCE-FIRST REVISION
+
+Split source and ensemble with one shared manifest.
+
+Process blocks strictly in manifest order.
+
+For each current block, read:
+
+- current English block;
+- current ensemble block;
+- immediately previous and next source and ensemble blocks as read-only
+  context.
+
+For every non-empty schema-selected target cell:
+
+For book rows, derive and compare title and body as one editorial unit.
+
+For item rows, derive and compare all selected Name/Description variants as one
+coordinated item family.
+
+For UI/system/general-string rows, derive and compare the current string with
+its paired title/body, numbered sequence, subtitle, or runtime-fragment context.
+
+1. read and analyze English before treating the ensemble as a solution;
+2. reconstruct:
+   - literal and pragmatic meaning;
+   - gameplay function;
+   - speaker and addressee;
+   - motivation, modality, certainty, aspect, and intensity;
+   - individual and faction voice;
+   - register;
+   - rhetoric and oral rhythm;
+   - humor, insult, metaphor, rituality, repetition, and wordplay;
+3. derive an independent Italian challenger;
+4. compare the challenger with the ensemble symmetrically;
+5. choose:
+   - ensemble wording when it is genuinely strongest;
+   - challenger wording when it is stronger;
+   - a synthesis when it is stronger than both;
+6. freely perform:
+   - targeted repair;
+   - complete retranslation;
+   - contextual rewrite;
+   - rhetorical recreation;
+7. write and validate the revised block.
+
+INTERNAL PROPOSAL DEPTH
+
+Simple low-risk row:
+
+- at least one independent challenger.
+
+Medium-risk or clearly weak row:
+
+- at least two genuinely different strategies.
+
+Humor, insult, metaphor, ritual language, deliberate repetition, wordplay,
+ambiguity, or marked rhythm:
+
+- at least three genuinely different strategies;
+- include a functional recreation when literal transfer weakens the effect.
+
+Do not output rejected alternatives.
+
+R1 PRIORITIES
+
+Actively improve:
+
+- semantic precision;
+- missing or altered motivation;
+- modality, certainty, aspect, and intensity;
+- Italian collocations;
+- translated syntax;
+- stiff or generic wording;
+- oral rhythm;
+- speaker, faction, authorial, and document voice;
+- register;
+- characterization;
+- humor and insults;
+- metaphor;
+- rituality;
+- deliberate repetition;
+- wordplay;
+- tutorial clarity;
+- literary, documentary, poetic, propagandistic, or technical genre voice;
+- title-body, byline, date, and series consistency;
+- concise item names and clear item descriptions;
+- item-family, rarity-tier, material, upgrade, stat, marker, and repeated
+  mechanical-formula consistency;
+- UI-label concision, consistent controls and commands, title/body alignment,
+  numbered-sequence continuity, subtitle rhythm, placeholder integrity, and
+  runtime-fragment compatibility;
+- contextual continuity.
+
+A line may require revision even when it is grammatical and understandable.
+
+MANDATORY SECOND SWEEP — ANTI-INERTIA COMPLETION PASS
+
+After all first-sweep blocks pass:
+
+1. assemble provisional R1;
+2. build the cross-block consistency index;
+3. revisit every block, not only changed blocks;
+4. reread English and provisional Italian;
+5. assume the first sweep may have missed subtle defects;
+6. actively search for:
+   - acceptable but inferior wording;
+   - recurring calques;
+   - weak collocations;
+   - translated information order;
+   - voice drift;
+   - flat rhetoric;
+   - weakened oral rhythm;
+   - lost humor, insult, metaphor, repetition, rituality, or wordplay;
+   - inconsistent parallel lines;
+   - inconsistent tutorial formulas;
+   - inconsistent item families, tiers, repeated mechanics, or UI names;
+   - inconsistent UI labels or controls, broken title/body relationships,
+     discontinuous numbered sequences, subtitle drift, altered placeholders, or
+     runtime fragments that no longer combine correctly;
+   - cross-block terminology drift;
+   - new regressions introduced during the first sweep;
+7. formulate a fresh challenger wherever a stronger justified solution may
+   exist;
+8. preserve the provisional text only when it wins the new comparison;
+9. save and validate corrected blocks.
+
+Never stop after the first sweep.
+
+Do not wait for the user to ask whether anything else is missing.
+
+FINAL QA
+
+After both editorial sweeps:
+
+- reassemble R1;
+- validate exact structure;
+- verify headers and metadata remain unchanged;
+- verify IDs, order, pipes, columns, and empty fields;
+- verify protected markers and boundaries;
+- verify numbers and approximation modifiers;
+- verify glossary and capitalization;
+- verify schema-appropriate Tu/Voi and direct-player address;
+- verify masculine-singular player agreement where applicable;
+- verify empty and literal null item cells remain unchanged;
+- verify item-family names, tiers, mechanics, numbers, percentages, comparative
+  modifiers, and #/## segment boundaries;
+- verify grammar, antecedents, punctuation, and whitespace.
+
+Correct objective failures only after the final editorial sweep.
+
+FINAL RESPONSE
+
+Return only:
+
+- the downloadable R1.txt;
+- one concise sentence confirming both sweeps and final QA.
+
+Then stop.
+
+================================================================================
+STAGE C — R2 INDEPENDENT FINAL REVISION
+================================================================================
+
+USER COMMANDS
+
+Revisione 2 <R1 file>
+
+or:
+
+R2 <R1 file>
+
+SESSION REQUIREMENT
+
+Run R2 in a new clean chat or isolated agent session.
+
+REQUIRED INPUTS
+
+- English source;
+- named Italian R1 file;
+- glossario.txt;
+- shared rules.
+
+DO NOT OPEN
+
+- candidate translations A–E;
+- ENSEMBLE;
+- critique files;
+- decision matrices;
+- reports or audits;
+- previous FINAL files;
+- external correction lists.
+
+ROLE
+
+Act as an independent authoritative final Italian localization editor.
+
+You are not proofreading R1.
+
+You are independently solving the English-to-Italian localization again and
+using R1 as one candidate.
+
+R1 has no status-quo privilege.
+
+OUTPUT POLICY
+
+Produce exactly one user-facing file:
+
+<source_stem>_IT_FINAL.txt
+
+Do not produce a critique, matrix, report, audit, rationale file, change log, or
+statistics.
+
+EDITING FREEDOM
+
+You may change any schema-selected target cell.
+
+You may undo an R1 edit.
+
+You may rewrite extensively.
+
+Do not optimize for the smallest number of changes.
+
+Do not preserve R1 because it already passed another revision.
+
+Do not change a line merely to demonstrate independence.
+
+FIRST SWEEP — BLIND SOURCE-FIRST FINAL RECONSTRUCTION
+
+Split source and R1 with one shared manifest.
+
+Process blocks strictly in manifest order.
+
+For each current block, read:
+
+- current English block first;
+- immediately previous and next English blocks as read-only context.
+
+Before judging R1 wording for a row:
+
+For book rows, reconstruct title and body together.
+For item rows, reconstruct the complete coordinated item family across every
+selected Name/Description variant.
+For UI/system/general-string rows, reconstruct the ideal paired, sequential, or
+composable context before judging the individual R1 cell.
+
+1. reconstruct the ideal Italian solution from English and context;
+2. internally formulate an independent challenger;
+3. only then compare the challenger with R1.
+
+After the challenger exists, read the matching R1 block and evaluate:
+
+- source fidelity;
+- semantic completeness;
+- motivation, modality, certainty, aspect, and intensity;
+- gameplay function;
+- native Italian naturalness;
+- grammar and collocation;
+- individual and faction voice;
+- register;
+- rhetoric and oral rhythm;
+- humor, insult, metaphor, rituality, repetition, and wordplay;
+- contextual fit;
+- glossary and technical safety.
+
+Choose:
+
+- R1 wording when it is strongest;
+- independent challenger when it is stronger;
+- a new synthesis when it is stronger than both.
+
+Write and validate the final-revision block before continuing.
+
+INTERNAL PROPOSAL DEPTH
+
+Simple low-risk row:
+
+- at least one independent source-first challenger.
+
+Medium-risk row:
+
+- at least two genuinely different strategies.
+
+Humor, insult, metaphor, ritual language, deliberate repetition, wordplay,
+ambiguity, marked rhythm, or a suspected R1 regression:
+
+- at least three genuinely different strategies;
+- include a functional recreation when appropriate.
+
+Do not output rejected alternatives.
+
+R2 RESPONSIBILITIES
+
+R2 must detect and correct:
+
+- defects that survived ENSEMBLE and R1;
+- shared model calques;
+- weak but grammatical Italian;
+- losses of meaning or gameplay function;
+- voice and register drift;
+- flattened humor, insults, metaphor, rituality, repetition, or wordplay;
+- excessive or unsupported creativity introduced by R1;
+- unnecessary verbosity;
+- unnatural word order;
+- inconsistent treatment of repeated English;
+- cross-block terminology and capitalization drift;
+- weakened book/document genre, title-body relationship, or deliberate
+  orthographic characterization;
+- weak item naming, obscured gameplay effects, broken tier progression,
+  inconsistent repeated mechanics, or drift between name and description;
+- verbose or inconsistent UI labels, broken title/body relations, discontinuous
+  numbered sequences, damaged subtitles, altered placeholders, or runtime
+  fragments that no longer combine correctly;
+- technical and structural failures.
+
+MANDATORY SECOND SWEEP — FINAL ADVERSARIAL AND REGRESSION PASS
+
+After all first-sweep blocks pass:
+
+1. assemble provisional FINAL;
+2. build the cross-block consistency index;
+3. revisit every block in manifest order;
+4. review every non-empty row again;
+5. do not limit attention to first-sweep changes;
+6. challenge both:
+   - unchanged R1 lines;
+   - new R2 lines;
+7. actively search for:
+   - anything still translated rather than written in Italian;
+   - a clearly stronger idiomatic alternative;
+   - semantic undertranslation or overtranslation;
+   - lost nuance, uncertainty, motivation, aspect, or intensity;
+   - voice and register inconsistency;
+   - weakened rhythm or rhetoric;
+   - failed humor, insult, metaphor, repetition, rituality, or wordplay;
+   - R1 or R2 over-editing;
+   - inconsistent repeated formulas;
+   - inconsistent item families, tiers, repeated mechanics, or UI names;
+   - inconsistent UI labels or controls, broken title/body relationships,
+     discontinuous numbered sequences, subtitle drift, altered placeholders, or
+     runtime fragments that no longer combine correctly;
+   - cross-block continuity problems;
+8. generate a fresh challenger wherever doubt remains;
+9. keep provisional wording only when it wins;
+10. save and validate corrected blocks.
+
+The second sweep is mandatory even if the first sweep appears excellent.
+
+Never ask the user whether another check is desired.
+
+FINAL RELEASE QA
+
+Only after both editorial sweeps:
+
+- reassemble FINAL;
+- verify headers and metadata are byte-for-byte unchanged;
+- verify exact physical-line count;
+- verify ID sequence;
+- verify pipes, columns, and empty fields;
+- verify protected markers and boundaries;
+- verify numbers and approximation modifiers;
+- verify glossary and capitalization;
+- verify schema-appropriate Tu/Voi and direct-player address;
+- verify masculine-singular player agreement where applicable;
+- verify empty and literal null item cells remain unchanged;
+- verify item-family names, tiers, mechanics, numbers, percentages, comparative
+  modifiers, and #/## segment boundaries;
+- verify grammar, antecedents, tense, mood, punctuation, typography, and
+  whitespace;
+- correct objective release failures;
+- rebuild and validate FINAL again.
+
+Do not begin another broad stylistic pass after release QA.
+
+FINAL RESPONSE
+
+Return only:
+
+- the downloadable FINAL.txt;
+- one concise sentence confirming:
+  - first block sweep completed;
+  - mandatory second block sweep completed;
+  - final release QA passed.
+
+Then stop.
+
+The localization workflow is complete.

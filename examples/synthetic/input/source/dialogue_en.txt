@@ -1,0 +1,7 @@
+INTRO_1|The old city has dreamed for a thousand years.|speaker=narrator
+INTRO_2|But tonight, something stirs beneath its streets.|speaker=narrator
+INTRO_3|And the bells answer from the empty towers.|speaker=narrator
+WARDEN_1|<<You inspect the sealed gate.>> Return with 3 silver keys.|speaker=warden
+WARDEN_2|Return when you are ready.|speaker=warden
+WARDEN_3|Return when you are ready.|speaker=warden
+UI_KEYS|Keys found: {0}/3|screen=inventory

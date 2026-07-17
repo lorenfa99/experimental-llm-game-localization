@@ -1,0 +1,263 @@
+DREAD DELUSION — HEADER-SELECTED TEXT FILE ADDENDUM v1.3
+
+APPLICABILITY
+
+Apply this file to task, quest, objective, journal, book, letter, poster, log,
+manual, sermon, notice, item, inventory, catalogue, menu, interface, system,
+tutorial, subtitle, sign, map, notification, general-string, or other structured
+tables whose editable English text is stored in header-defined columns.
+
+Dialogue files whose editable text is immediately after the ID continue to use
+the default dialogue contract.
+
+GENERAL HEADER-SELECTED CONTRACT
+
+1. Locate exactly one table header.
+2. Select only the English field or fields authorized by the matching schema.
+   Numeric prefixes such as "2: English Title" are allowed.
+3. Never select or write into a field labelled Italian.
+4. Replace only the selected English field contents with Italian.
+5. Preserve every non-target field byte for byte, including later language
+   fields, metadata, flags, image IDs, and existing Italian fields.
+6. Preserve physical-line count, row order, field count, pipe count, pipe
+   positions, line endings, encoding, and empty non-target fields.
+7. Rows lacking the complete schema-selected field set are locked.
+8. Within selected fields, preserve empty cells and any schema-defined literal
+   sentinel such as null exactly unchanged.
+9. Use physical line number as the primary row key.
+
+LOCKED ROWS
+
+Keep unchanged:
+
+- developer notes and explanatory rows above the header;
+- the header row;
+- blank or malformed rows;
+- rows outside active scope;
+- rows whose selected English fields are all empty or schema-defined
+  sentinels;
+- every non-target field.
+
+TASK, QUEST, OBJECTIVE, AND JOURNAL TABLES
+
+Select the single field labelled English, allowing an optional numeric prefix.
+
+Bare stage IDs may repeat under different parent tasks and are not duplicates.
+Use physical line number as the primary key and retain parent-task context.
+
+Task and journal descriptions are system-to-player text. Use singular Tu and
+masculine-singular agreement for the player. Preserve completed events, current
+state, advice, obligation, remaining objectives, stage progression, and
+consequences.
+
+A source may define an exact first translatable row. Include the anchor row,
+require exactly one match, and preserve every earlier physical row unchanged.
+
+BOOK AND DOCUMENT TABLES
+
+Classify a table as book/document data when its header contains both:
+
+- English Title
+- English Text
+
+allowing optional numeric prefixes.
+
+Both fields are editable and must be translated in place. Treat title and body
+as one coordinated editorial unit. Preserve every other field unchanged,
+including Italian Title and Italian Text.
+
+BOOK BLOCK OVERRIDE
+
+In every stage—A–E, adjudication, R1, and R2—one active physical book row is
+exactly one block.
+
+Never place two active book rows in the same block.
+Never split one book row, its title, or its body across blocks.
+The ordinary 10-row and 12,000-character limits do not split a book row.
+
+The header and any locked rows before the first active book row may accompany
+the first block but do not count as a book row.
+
+BOOK EDITORIAL RULES
+
+Before translating, identify the document type and preserve its function:
+narrative, poetry, history, essay, propaganda, letter, diary, log, poster,
+advertisement, sermon, manual, textbook, record, or administrative notice.
+
+Preserve:
+
+- title-body relationship, byline, date, volume, headings, and signatures;
+- narrator or authorial persona, point of view, intended reader, and chronology;
+- genre, period, formality, ideology, satire, humor, and rhetorical structure;
+- quoted dialogue and distinct voices inside the document;
+- poetic lineation, refrains, lists, headings, and paragraph progression;
+- deliberate misspelling, poor literacy, archaism, bureaucratic capitalization,
+  or other marked orthography as characterization.
+
+Recreate deliberate errors functionally in Italian. Do not mechanically copy
+English misspellings, and do not silently correct an intentionally uneducated,
+archaic, propagandistic, or bureaucratic voice.
+
+Do not apply the dialogue NPC Voi rule automatically. Follow the source-defined
+narrative person, addressee, and form of address.
+
+In book fields, # and ## are protected layout separators. Preserve their exact
+type, count, and order. Keep each translated segment on the corresponding side
+of the same separator.
+
+Titles may remain lexically unchanged only when the strongest Italian solution
+is genuinely identical, such as a proper name. Generic title words, bylines,
+volume labels, notices, and descriptive subtitles should be localized.
+
+ITEM, INVENTORY, AND CATALOGUE TABLES
+
+Classify a table as item data when its header contains an item-ID field and
+multiple coordinated fields labelled Name and Description, optionally qualified
+by rarity, material, quality, upgrade tier, or variant.
+
+Select every authorized Name and Description field. Do not select item-ID,
+import, lookup, metadata, flag, or language-output fields.
+
+Treat each physical item row as one coordinated item family. Names and
+descriptions across Poor, Common, Fine, Shroom, Clockwork, Void, Emberian, or
+other variants must be reviewed together.
+
+ITEM BLOCK OVERRIDE
+
+In every stage—A–E, adjudication, R1, and R2—use at most five active physical
+item rows per block and retain the 12,000-character limit.
+
+Never split one item row across blocks. Keep all selected Name/Description
+fields from that row together. End the block before adding a row that would
+exceed either limit. If one row alone exceeds the character limit, process it
+alone.
+
+ITEM EDITORIAL RULES
+
+Names must be concise, interface-readable, idiomatic, and consistent with the
+glossary, item type, rarity, material, and upgrade tier. Do not force different
+names where the source intentionally repeats a name across variants.
+
+Descriptions must preserve:
+
+- gameplay effect, target, trigger, requirement, limitation, and duration;
+- statistics, skills, status effects, materials, upgrades, and item references;
+- all numbers, percentages, quantities, comparatives, and approximation;
+- the distinction between mechanical explanation and lore;
+- humor, atmosphere, and item-family voice;
+- repeated formulas and shared base descriptions across related rows or tiers.
+
+In item fields, # and ## are protected line or section separators. Preserve
+their exact type, count, order, and segment boundaries.
+
+Do not apply the dialogue NPC Voi rule. When an item description directly
+addresses the player, use singular Tu and masculine-singular agreement;
+otherwise use natural impersonal or descriptive Italian.
+
+Correct accidental English typos through the translation. Preserve marked
+misspelling or unusual wording only when it is clearly deliberate, quoted, or
+diegetic.
+
+Empty selected cells and literal null cells are locked and remain byte-identical.
+
+UI, SYSTEM, AND GENERAL-STRING TABLES
+
+Classify a table as UI/system/general-string data when it contains one
+header-defined English field alongside language-output columns and is not more
+specifically classified as a task, book/document, or item table.
+
+Select only the field labelled English, allowing an optional numeric prefix.
+Preserve the string-ID field and every later language field unchanged.
+
+Use physical line number plus string ID as row identity. Every physical row is
+indivisible.
+
+BLOCK MODE
+
+Use the universal limit of at most 10 active physical rows and 12,000 Unicode
+characters. End a block only between physical rows.
+
+Related rows may cross block boundaries, but the immediately adjacent context
+and the cross-block consistency index must preserve:
+
+- _TITLE or _T rows and their corresponding body rows;
+- numbered sequences such as INTRO_SUB1, INTRO_SUB2, and following rows;
+- fragments designed to concatenate at runtime;
+- recurring controls, menu labels, confirmations, notifications, tutorials,
+  faction labels, map labels, status messages, and system formulas.
+
+UI AND SYSTEM EDITORIAL RULES
+
+Identify whether each string is a label, command, title, body, confirmation,
+warning, error, tutorial, notification, statistic, subtitle, sign, map text,
+diegetic message, or runtime fragment.
+
+Preserve:
+
+- concise interface readability and consistent terminology;
+- the relationship between title and body rows;
+- sequence order, progression, rhythm, and grammar across numbered rows;
+- placeholders such as {0} exactly, including braces, index, count, and order;
+- protected markers, # and ## separators, [[ ]], (( )), and << >>;
+- capitalization and punctuation when functionally meaningful;
+- fragments that must combine with neighbouring or dynamically inserted text;
+- intentional drunken, illiterate, archaic, propagandistic, bureaucratic, or
+  otherwise diegetic spelling and register.
+
+Use singular Tu and masculine-singular agreement when the system directly
+addresses the player. Do not apply NPC allocutive Voi.
+
+Keep button labels and menu commands concise. Do not expand a short control into
+a sentence unless the source itself is a sentence.
+
+Correct accidental English errors through translation, but do not silently
+normalize intentional characterization or runtime fragments.
+
+CURRENT SOURCE CLASSIFICATIONS
+
+TASK SOURCE
+
+Source: delusionTasks_allLanguages-resources.assets-53.txt
+Selected field: English
+First translatable row begins exactly with:
+mainQuest|mainQuest|FactionInq|||||||||||||||||0|The Hunt for Vela Callose
+
+Include that row, preserve all earlier rows unchanged, and continue through the
+end of the file.
+
+BOOK SOURCE
+
+Source: bookData_AllLanguages-resources.assets-52.txt
+Selected fields: English Title and English Text
+Active scope: every valid non-empty data row after the header.
+Block mode: exactly one active physical data row per block.
+
+GENERAL STRING SOURCE
+
+Source: generalData_AllLanguages-resources.assets-34.txt
+Header: the unique first row exactly equal to:
+|1: English|2: French|3. German|4. Spanish|5. Italian
+Selected field: column 1, English
+Locked fields: column 0 string ID and columns 2–5 French/German/Spanish/Italian
+Locked row: the header
+Active scope: every valid non-empty data row after the header
+Row identity: physical line number plus column 0 string ID
+Block mode: at most 10 active physical rows and 12,000 characters; every row is
+indivisible
+Coordination watchlist: _TITLE/body and _T/body pairs, numbered sequences,
+INTRO_SUB1–INTRO_SUB38, runtime fragments, placeholders, repeated control and
+system formulas, and intentionally diegetic strings.
+
+ITEM SOURCE
+
+Source: delusionItemText_English-resources.assets-65.txt
+Header: the unique row beginning with "0: Item ID (COPY FROM CLM N)"
+Selected fields: columns 1–14, comprising every Poor/Common/Fine/Shroom/
+Clockwork/Void/Emberian Name and Description field
+Locked fields: column 0 Item ID and column 15 imported Item ID
+Locked rows: the developer-note row before the header and the header itself
+Locked selected cells: empty cells and exact literal null cells
+Active scope: every valid data row after the header
+Row identity: physical line number plus the first Item ID field
+Block mode: at most five active physical item rows and 12,000 characters;
+each physical item row is indivisible.
