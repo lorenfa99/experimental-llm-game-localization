@@ -1,0 +1,53 @@
+[project]
+name = "Example localization"
+source_culture = "en"
+target_culture = "it"
+preparation_only = true
+
+[adapter]
+type = "json"
+
+# Used only by the optional Unreal .pak adapter.
+[game]
+project_dir = "SampleGame"
+localization_target = "Game"
+pak_relative = "SampleGame/Content/Paks"
+root = ""
+steam_install_dir = ""
+process_names = []
+
+[tools]
+repak_version = "0.2.3"
+repak = "work/tools/repak-v0.2.3/repak.exe"
+
+[packets]
+max_units = 40
+max_words = 1100
+context_before = 8
+context_after = 4
+batch_packets = 3
+batch_max_input_bytes = 180000
+
+[pipeline]
+waves = ["pilot", "names", "mechanics", "ui", "story", "unclassified"]
+stages = ["translate", "review", "revise", "consistency", "fluency", "lqa"]
+required_gates = ["source", "style", "glossary", "characters"]
+pilot_units_per_kind = 3
+pilot_groups = []
+
+[references]
+preferred_cultures = ["fr", "es", "de"]
+excluded_cultures = ["en-US-POSIX"]
+packet_primary_limit = 4
+
+[qa]
+length_ratio_warning = 1.6
+ui_length_ratio_warning = 1.3
+font_characters = ""
+
+# Unreal output options; JSON candidates are engine-neutral intermediate files.
+[build]
+slot = "en"
+pak_version = "V11"
+mount_point = "../../../"
+filename = "Localization_P.pak"

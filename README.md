@@ -1,116 +1,111 @@
 # Experimental LLM Game Localization
 
-A source-first, human-reviewed, structure-safe workflow for experimenting with
-LLM-assisted video-game localization.
+A working, versioned localization harness derived from the **Queen's Domain**
+Italian project. An orchestrator runs the linguistic workflow through real agent
+contexts; Python preserves identities, freezes assignments and verifies results.
 
-This project automates the engineering around localization: corpus inventory,
-schema declaration, immutable baselines, explicit correction lists,
-deterministic validation, consistency indexes, checksums, and release evidence.
-It does **not** claim that unattended LLM output is release-ready.
+The complete linguistic pipeline can run automatically inside an existing coding
+agent environment. Owners set scope, authorization and decision authority. The
+harness itself makes no model calls and requires no paid API integration.
 
-## Why this exists
+## The method
 
-Large game localizations fail in two different ways:
+1. **Prepare:** capture immutable source/reference revisions; establish scope,
+   complete scene context, style, glossary and character profiles.
+2. **Pilot:** translate a representative set, independently review it, resolve
+   findings and assess a pilot report before accepting its gate.
+3. **Translate:** one writer owns each small frozen packet.
+4. **Review and revise:** a genuinely separate bilingual reviewer reports issues;
+   the reviser resolves every issue. Every changed version returns to review.
+5. **Consistency, then fluency:** separate corpus passes, followed by independent
+   rereview of their changes.
+6. **Verify an offline candidate:** complete stage/version closure, QA, source-copy,
+   roundtrip, artifact readback and applicable font/markup checks.
+7. **Runtime LQA and release:** actual in-game testing and owner decisions remain
+   distinct from successful offline packaging.
 
-1. the language can be inaccurate, literal, flat, or inconsistent;
-2. the file can be structurally invalid even when the prose sounds good.
+A different worker name is insufficient proof of independence. The host must
+create a fresh context without the writer's conversation or private reasoning.
 
-The workflow treats these as separate problems. An LLM or human editor makes
-linguistic decisions. Deterministic tools preserve and verify the data.
+For later corrections, reuse completed work: inspect the findings and real
+cross-references, change only justified text, independently rereview it, complete
+invalidated stages and run one final complete deterministic verification round.
+Two principal linguistic contexts usually suffice for a small maintenance batch.
 
-The approach was distilled from a complete Italian localization project that
-combined two phases:
+## What is implemented
 
-- a Web workflow with independent candidates, adjudication, and two revisions;
-- a Codex workflow with per-file source-first review, explicit corrections,
-  corpus-wide audits, packaging, and verification of the shipped game asset.
+- SQLite corpus, source snapshots, target versions, history and approval records;
+- transactional claims, one live owner per packet, frozen inputs and saved drafts;
+- stage scheduling, stale-input rejection, issues and explicit resolutions;
+- version-bound **offline** external-review imports with real provenance;
+- lossless complete rule views, focused evidence lookups and complete linked graphs;
+- placeholder, markup, Unicode, glossary and configurable-language QA;
+- candidate/release prerequisites, local reports and private SQLite-safe checkpoints;
+- engine-neutral JSON and Unreal `.locres` / single `.pak` adapters.
 
-## Three supported workflows
-
-### Greenfield localization
-
-Use independent translations, adjudication, an expansive editorial revision,
-and an isolated final revision. Freeze the resulting file as the approved
-baseline, then run the release-QA workflow.
-
-### Existing translation
-
-Skip candidate generation. Treat the existing translation as an approved
-baseline and perform a minimal-diff final QA: source-first semantic review,
-target-language quality review, explicit corrections, structural validation,
-and corpus-wide consistency checks.
-
-### Hybrid
-
-Generate or improve selected high-risk material with the editorial pipeline,
-then switch to the conservative release-QA workflow once a baseline is
-approved. Do not mix expansive rewriting and final minimal-diff QA silently.
+The agent host supplies model access and actual context isolation. JSON builds are
+verified intermediates; injection into a game requires a suitable engine adapter.
 
 ## Quick start
 
-Requirements: Python 3.11 or newer. The core CLI uses only the standard
-library.
+Python 3.11+; the core uses the standard library. From a checkout:
+
+```powershell
+python -m locpipe doctor
+python -m locpipe import-source examples/synthetic/source.json --label synthetic
+python -m locpipe status --brief
+python -m locpipe pending
+python -m locpipe gate list
+python -m locpipe plan
+```
+
+Preparation mode starts enabled. Establish project-specific rules and actual owner
+or delegated decisions before enabling translation and recording approvals.
+Start the orchestrator with [the reusable prompt](prompts/ORCHESTRATOR.md).
+
+To create an isolated project:
 
 ```powershell
 python -m pip install -e .
 locpipe init my-localization
-locpipe inventory my-localization/project.toml
-locpipe validate my-localization/project.toml --mode baseline
-locpipe apply my-localization/project.toml my-localization/work/CORRECTIONS.jsonl
-locpipe validate my-localization/project.toml --mode release
-locpipe index my-localization/project.toml
-locpipe checksums my-localization/project.toml
+locpipe --project my-localization doctor
 ```
 
-A synthetic, copyright-safe example is available under
-[`examples/synthetic`](examples/synthetic).
+The initializer supplies configuration, rules, role prompts and worker utilities.
+Change source/target cultures, identity domain and adapter for your project.
+`config.local.toml` holds local settings and stays private.
 
-## Repository map
+For a fully scripted **engineering simulation**, without models or game files:
 
-- `src/locpipe/`: deterministic CLI and reusable Python library.
-- `prompts/`: provider-neutral prompt templates for the editorial stages.
-- `docs/`: methodology, porting guide, validation contract, and lessons learned.
-- `case-studies/dread-delusion/`: methodology and historical prompts only; no
-  extracted game text or proprietary game assets.
-- `examples/synthetic/`: small synthetic delimited-text project.
-- `tests/`: standard-library unit tests.
+```powershell
+python scripts/run_synthetic_demo.py
+python -m unittest discover -s tests -v
+```
 
-## Core invariants
+Simulated roles exercise the state machine; they do not certify linguistic quality
+or real independent agent contexts.
 
-- Source files and approved baselines are immutable.
-- Each file pair declares its own schema and editable fields.
-- Non-translatable fields remain unchanged.
-- Line count, row order, IDs, delimiters, markers, placeholders, numbers,
-  encoding, BOM, newline style, and final-newline state are validated.
-- Linguistic corrections are authored explicitly; scripts never invent prose.
-- Baseline failures are recorded before editorial changes begin.
-- A release is not complete until the packaged artifact is independently read
-  back and checked by a game-specific adapter.
+## Adapters and commands
 
-## Important limits
+The JSON adapter accepts lossless, identity-based source exports from any engine.
+The Unreal adapter retains native key/namespace hashes and source CRCs, verifies
+pak readback and supports receipt-owned overlay installation/restoration when
+explicitly authorized. It supports a single unencrypted vanilla pak, not IoStore.
+A configured custom adapter can extend the same protocol.
 
-The included CLI currently targets delimited text tables. Extraction from and
-injection into Unity, Unreal, proprietary archives, databases, or binary asset
-formats requires a game-specific adapter. Those adapters must be developed and
-distributed only when legally permitted.
+See [workflow and commands](docs/WORKFLOW.md), [adapter format](docs/ADAPTERS.md),
+[technical contract](docs/TECHNICAL.md) and [efficient agent use](docs/EFFICIENCY.md).
 
-Do not commit copyrighted game text, extracted assets, encryption keys,
-credentials, or commercial binaries to a public repository. This toolkit does
-not grant permission to translate or redistribute any game.
+## Evidence and origins
 
-## AI transparency
+[The Queen's Domain case study](docs/CASE_STUDY_QUEENS_DOMAIN.md) records the current
+method, owner-recorded Claude/Codex/Gemini tools and aggregate outcomes. It contains
+no extracted game text. This repository distributes reusable code, empty project
+rules and synthetic fixtures; real corpora, references and checkpoints stay private.
 
-The methodology supports manual use of ChatGPT, Codex, or another language
-model, but ships no provider integration and sends no data to an external API.
-Automation ends at orchestration and validation unless a user deliberately
-adds a provider adapter.
+Version **0.2.0** replaces the earlier delimited-table toolkit. The old files remain
+in Git history. Its `project.toml` and correction format are not compatible with this
+versioned database: perform an explicit source intake instead of copying old state.
 
-## Status
-
-Experimental. The design is intentionally conservative: a validator PASS
-proves structural compliance, not linguistic quality.
-
-## License
-
-Code and original documentation are released under the MIT License. Game
-content, third-party tools, and external model services are not covered.
+MIT license for this code and original documentation. Third-party tools and game
+material keep their own licenses; see [tool notices](tools/THIRD-PARTY.md).

@@ -1,21 +1,11 @@
-# Prompt set
+# Agent roles
 
-These templates are provider-neutral. Replace every `{{VARIABLE}}` before use
-and attach the project's binding rules, glossary, manifest, and relevant files.
+Replace template variables for the project. Start with ORCHESTRATOR.md. Assigned
+workers read AGENTS.md, their role, complete rule views, frozen packets and matching
+scenes. Global startup is not repeated per packet. The host creates real isolated
+contexts; a role title or simulated demo actor is not evidence of independence.
 
-Recommended order for a greenfield project:
-
-1. `00_PROJECT_GOVERNANCE.md`
-2. `01_INDEPENDENT_TRANSLATION.md` in isolated sessions
-3. `02_ADJUDICATION.md`
-4. `03_EXPANSIVE_REVISION.md`
-5. `04_INDEPENDENT_FINAL_REVISION.md` in a clean session
-6. freeze the result as the approved baseline
-7. `05_RELEASE_QA_CODEX.md`
-8. `06_PACKAGING_VERIFICATION.md`
-
-For a good existing translation, begin directly with project governance and
-release QA.
-
-Prompt compliance is not proof of completion. The deterministic artifacts and
-validation reports are the auditable evidence.
+Initial work: TRANSLATE, BILINGUAL_REVIEW, RESOLVED_REVISION, CORPUS_CONSISTENCY,
+TARGET_FLUENCY, OFFLINE_CANDIDATE, then owner-requested RUNTIME_LQA.
+MAINTENANCE reuses completed work for focused corrections; EXTERNAL_REVIEW supplies
+optional additional linguistic findings. Every changed version returns to review.
