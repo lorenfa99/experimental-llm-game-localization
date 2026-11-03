@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "experimental-llm-game-localization"
-version = "0.2.0"
+version = "0.3.0"
 description = "Versioned, agent-orchestrated game localization with independent review and offline candidate verification"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -23,4 +23,9 @@ where = ["."]
 include = ["locpipe*"]
 
 [tool.setuptools.package-data]
-locpipe = ["templates/**/*", "templates/project/.gitignore"]
+locpipe = [
+    "templates/**/*",
+    "templates/project/.gitignore",
+    "templates/project/.agents/skills/*/SKILL.md",
+    "templates/project/.claude/commands/*.md",
+]

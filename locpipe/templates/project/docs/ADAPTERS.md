@@ -56,6 +56,14 @@ verify, fonts, discover, install and restore functions. Signatures match the two
 built-ins. A source-file capture receives `(cfg, db, label, input_path)`; game-root
 capture receives `(cfg, db, label, game_root_override)`.
 
+A custom adapter may also define `audit_candidate(cfg, db, build)`, called by
+`scripts/candidate_audit.py` after the harness checks. It reads the built artifact and
+returns a JSON-serializable mapping that is recorded verbatim as `artifact_content`;
+include a boolean `artifact_matches_corpus`. It must not mutate the project and should
+raise HarnessError when the artifact disagrees with the corpus. Without the hook the
+audit records `artifact_matches_corpus: null` and says the artifact was not compared,
+rather than guessing.
+
 Reuse extract.import_snapshot and build.preflight to preserve identity/version and
 quality invariants. Never silently import target text or waive a core stage. Unsupported
 operations must raise HarnessError. Capture must validate before mutation, preserve

@@ -1,0 +1,62 @@
+# Sanitized shape of the configuration used for the Queen's Domain Italian project.
+# Copy the settings you want into your own config.toml. Machine paths, process names,
+# game-specific scene families and anything derived from the game are deliberately
+# omitted or replaced with generic placeholders.
+
+[project]
+name = "Example game - Italian localization"
+source_culture = "en"
+target_culture = "it"
+# Stays true during preparation. Set to false only after the owner authorizes translation.
+preparation_only = false
+
+[adapter]
+type = "unreal"
+
+[game]
+project_dir = "SampleGame"
+localization_target = "Game"
+pak_relative = "SampleGame/Content/Paks"
+# Machine-specific paths belong in the ignored config.local.toml.
+root = ""
+
+[tools]
+repak_version = "0.2.3"
+repak = "work/tools/repak-v0.2.3/repak.exe"
+
+[packets]
+# Small, related packets; one writer owns each. A role may hold a short batch.
+max_units = 40
+max_words = 1100
+context_before = 8
+context_after = 4
+batch_packets = 3
+batch_max_input_bytes = 180000
+
+[pipeline]
+waves = ["pilot", "names", "mechanics", "ui", "story", "unclassified"]
+stages = ["translate", "review", "revise", "consistency", "fluency", "lqa"]
+required_gates = ["source", "style", "glossary", "characters"]
+pilot_units_per_kind = 8
+# Complete scene families added to the automatic pilot sample (replace with your own).
+pilot_groups = ["family:NPCs/Example"]
+
+[references]
+# Ordered working references; other shipped languages stay available on demand.
+preferred_cultures = ["fr", "es-419", "pt-BR", "de"]
+packet_primary_limit = 4
+excluded_cultures = ["en-US-POSIX"]
+
+[qa]
+length_ratio_warning = 1.6
+ui_length_ratio_warning = 1.3
+# Characters the target language needs that a font must be able to render.
+font_characters = "ÀÈÉÌÒÓÙàèéìòóù«»’…—"
+
+[build]
+# A separate overlay replaces the English resource, selected by the English menu option.
+# Adding a new `it` culture or menu entry needs runtime verification before it is supported.
+slot = "en"
+pak_version = "V11"
+mount_point = "../../../"
+filename = "SampleGame_Italian_P.pak"

@@ -41,7 +41,12 @@ Two principal linguistic contexts usually suffice for a small maintenance batch.
 - lossless complete rule views, focused evidence lookups and complete linked graphs;
 - placeholder, markup, Unicode, glossary and configurable-language QA;
 - candidate/release prerequisites, local reports and private SQLite-safe checkpoints;
-- engine-neutral JSON and Unreal `.locres` / single `.pak` adapters.
+- engine-neutral JSON and Unreal `.locres` / single `.pak` adapters;
+- orchestration scripts: bounded batch claims, dispatch/acceptance receipts, stage and
+  candidate audits, evidence snapshots and live HANDOFF progress;
+- an offline external-review kit (build, parse, independent triage, `issue-import`);
+- glossary audit and packet-family planning for bulk work;
+- shared agent skills (`loc-run`, `loc-lqa`, `loc-update`) with Claude Code commands.
 
 The agent host supplies model access and actual context isolation. JSON builds are
 verified intermediates; injection into a game requires a suitable engine adapter.
@@ -93,17 +98,21 @@ pak readback and supports receipt-owned overlay installation/restoration when
 explicitly authorized. It supports a single unencrypted vanilla pak, not IoStore.
 A configured custom adapter can extend the same protocol.
 
-See [workflow and commands](docs/WORKFLOW.md), [adapter format](docs/ADAPTERS.md),
-[technical contract](docs/TECHNICAL.md) and [efficient agent use](docs/EFFICIENCY.md).
+See [workflow and commands](docs/WORKFLOW.md), [orchestration](docs/ORCHESTRATION.md),
+[external review](docs/EXTERNAL-REVIEW.md), [runtime LQA](docs/RUNTIME-LQA.md),
+[adapter format](docs/ADAPTERS.md), [technical contract](docs/TECHNICAL.md) and
+[efficient agent use](docs/EFFICIENCY.md).
 
 ## Evidence and origins
 
 [The Queen's Domain case study](docs/CASE_STUDY_QUEENS_DOMAIN.md) records the current
-method, owner-recorded Claude/Codex/Gemini tools and aggregate outcomes. It contains
-no extracted game text. This repository distributes reusable code, empty project
+method, owner-recorded Claude/Codex/Gemini tools and aggregate outcomes, and
+[`examples/queens-domain`](examples/queens-domain/README.md) shows how that project's
+workflow maps onto this repository. Neither contains extracted game text. This repository distributes reusable code, empty project
 rules and synthetic fixtures; real corpora, references and checkpoints stay private.
 
-Version **0.2.0** replaces the earlier delimited-table toolkit. The old files remain
+Version **0.3.0** adds the orchestration, external-review and runtime-handoff tooling
+on top of the 0.2.0 harness, which replaced the earlier delimited-table toolkit. The old files remain
 in Git history. Its `project.toml` and correction format are not compatible with this
 versioned database: perform an explicit source intake instead of copying old state.
 

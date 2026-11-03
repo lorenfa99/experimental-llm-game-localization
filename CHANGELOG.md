@@ -1,5 +1,24 @@
 # Changes
 
+## 0.3.0
+
+- Add the orchestration layer from the Queen's Domain run: bounded batch claims,
+  dispatch/reconciliation/acceptance receipts, current-version stage audit, evidence
+  snapshot with a bilingual pilot table, live HANDOFF progress and a read-only final
+  candidate audit with an optional `audit_candidate` adapter hook.
+- Add the offline external-review kit: word-balanced chats, rules and context bundles,
+  hash manifest, strict parsing bound to exact unit versions, triage skeleton and an
+  `issue-import` export that returns aggregates only.
+- Add `glossary_audit.py` and `plan_groups.py` for large corpora; QA glossary matching is
+  shared through `qa.term_matches`.
+- Add shared agent skills (`loc-run`, `loc-lqa`, `loc-update`), Claude Code commands and
+  the offline-worker and runtime-fix prompts; rewrite the translate, review and
+  revision prompts around the verified rule views.
+- Document orchestration, external review and runtime LQA; scaffold all of it with
+  `locpipe init`; add `examples/queens-domain`.
+- Known limitation: glossary target forms are matched on word boundaries, so scripts
+  written without spaces are not matched when adjacent to other characters.
+
 ## 0.2.0
 
 - Replace the original delimited-table toolkit and legacy ensemble prompts with
