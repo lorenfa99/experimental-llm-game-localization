@@ -29,6 +29,10 @@ proposals were rejected with evidence. Three changed versions completed independ
 bilingual rereview, resolved revision and local consistency/fluency. Unaffected work
 was retained. This is the maintenance pattern documented in the current prompts.
 
+The reusable pieces of this run are now part of the repository: see
+[the orchestration guide](ORCHESTRATION.md), [the external review guide](EXTERNAL-REVIEW.md)
+and [the example mapping](../examples/queens-domain/README.md).
+
 ## Evidence boundaries
 
 The candidate completed offline QA, native identity/CRC checks, source-copy and

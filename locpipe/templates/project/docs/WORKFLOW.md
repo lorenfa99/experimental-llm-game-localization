@@ -38,6 +38,12 @@ With a separate project, include `--project <directory>` on each locpipe command
 whole packet atomically. Failed results remain drafts. Recover them before new work.
 Use `release` or `abandon` only after confirming the owner stopped and recording why.
 
+For many packets, the orchestrator can claim related packets as one bounded batch,
+record dispatch and acceptance receipts and audit stage closure with the scripts in
+[the orchestration guide](ORCHESTRATION.md). Invoke the shared skills `loc-run`,
+`loc-lqa` and `loc-update` (`.agents/skills/`, with `/loc-*` entry points for Claude
+Code) to run the pipeline, the owner-requested runtime pass and a later source update.
+
 Claim `review` in a genuinely fresh non-author context, then `revise`. The reviewer
 reports issues; the reviser resolves all issues explicitly. A changed version returns
 to review and final revision. Worker labels do not establish actual independence.
@@ -48,8 +54,10 @@ pass keep their completed pass marker while requiring current bilingual closure.
 
 ## Focused maintenance and external review
 
-Read external outputs and notes, verify their exact source/target bindings, then
-triage them with evidence. Record accept/adapt/reject/unresolved decisions.
+For an outside model's second opinion, build a private kit, carry it to the chats by
+hand and parse the replies with `scripts/external_review_kit.py` (see
+[the external review guide](EXTERNAL-REVIEW.md)). Read external outputs and notes,
+verify their exact source/target bindings, then triage them with evidence. Record accept/adapt/reject/unresolved decisions.
 Use `issue-import <findings.jsonl> --origin <offline-origin> --by <actual-actor>
 --note <provenance>` for validated offline findings. Required fields are documented
 in [the technical contract](TECHNICAL.md). It reopens resolution and records actual
@@ -67,8 +75,11 @@ Run `qa --source`, `qa --release`, `roundtrip`, applicable `fonts`, a fresh
 Builds refuse missing/stale targets, open issues, unfinished packets or stale gates.
 JSON readback verifies an intermediate; Unreal readback verifies the native overlay.
 
+Close the offline scope with `python scripts/candidate_audit.py <candidate-label>
+<new-label>`: read-only evidence that stages, gates, QA and the built artifact agree.
 Write concise coverage/quality evidence and a targeted runtime test plan. Preserve a
 private checkpoint with `python scripts/checkpoint.py <path-inside-project>` from
-the project directory. Installation and restoration are explicit owner actions.
+the project directory. Installation and restoration are explicit owner actions; the runtime procedure is in
+[the runtime LQA guide](RUNTIME-LQA.md).
 `build --mode release` additionally needs actual runtime/release approvals.
 A package check is not a game test.

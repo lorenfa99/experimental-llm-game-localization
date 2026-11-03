@@ -32,6 +32,11 @@ Use --project when the project is separate from this checkout.
   Serialization order does not establish chronology, speaker or reachability.
 - For ambiguity follow docs/MULTILINGUAL-REFERENCES.md; cite material comparisons,
   preserve unknowns and never vote by number of languages.
+- Orchestrators batch, dispatch and audit with scripts/claim_batch.py,
+  record_batch.py, stage_audit.py, report_snapshot.py, save_progress.py and
+  candidate_audit.py (docs/ORCHESTRATION.md). Receipts are attestations. Outside
+  review follows docs/EXTERNAL-REVIEW.md; runtime work follows docs/RUNTIME-LQA.md
+  and only when the owner asks.
 - Validate scripts/check_result.py before submit. Preserve rejected drafts and
   every issue resolution. Necessary binding changes occur between affected batches.
 - For targeted maintenance reuse valid receipts and inspect changed units plus
