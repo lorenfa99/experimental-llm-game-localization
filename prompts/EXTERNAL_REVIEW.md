@@ -13,3 +13,7 @@ severity, comment and suggestion (text or null). Preserve exact values and disti
 preferences from defects. List unresolved questions separately. If an attachment is
 incomplete or unreadable, report the limitation. These are proposals for subsequent
 verification, not an approval, automatic target import or runtime test.
+
+When the assignment comes from `scripts/external_review_kit.py`, the kit's own PROMPT is
+authoritative: its parser binds the identity fields itself and needs only `version` and
+`current_target` echoed exactly. See docs/EXTERNAL-REVIEW.md.
