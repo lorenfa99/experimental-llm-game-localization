@@ -84,6 +84,28 @@ def eligible(cfg, db, stage, worker=""):
     return result
 
 
+def select(cfg, units):
+    """One packet's units: the first eligible group, bounded by the configured size limits.
+
+    The only selection rule; claims and batch previews both use it."""
+    group = units[0]["grp"]
+    selected, words = [], 0
+    for u in units:
+        n = len(u["source"].split())
+        if u["grp"] != group:
+            continue
+        if selected and (len(selected) >= cfg["packets"]["max_units"] or words + n > cfg["packets"]["max_words"]):
+            break
+        selected.append(u)
+        words += n
+    return group, selected, words
+
+
+def claim_payload(cfg, db, group, selected, words):
+    """Version-bound claim stamp. Later submits are rejected if any of it changed."""
+    return {"sids": [u["sid"] for u in selected], "group": group, "snapshot": db.meta("active_snapshot"), "corpus_hash": db.corpus_hash(), "contract_hash": cfg.contract_hash(), "versions": {u["sid"]: [u["source_sha"], u["source_hash"], u["version"]] for u in selected}, "source_words": words}
+
+
 def claim(cfg, db, stage, worker):
     cfg.require_translation()
     if not worker.strip():
@@ -98,18 +120,9 @@ def claim(cfg, db, stage, worker):
         units = eligible(cfg, db, stage, worker)
         if not units:
             return {"claimed": None, "reason": "No eligible work; inspect plan, pending packets, locks and owner gates"}
-        group = units[0]["grp"]
-        selected, words = [], 0
-        for u in units:
-            n = len(u["source"].split())
-            if u["grp"] != group:
-                continue
-            if selected and (len(selected) >= cfg["packets"]["max_units"] or words + n > cfg["packets"]["max_words"]):
-                break
-            selected.append(u)
-            words += n
+        group, selected, words = select(cfg, units)
         pid = stage + "-" + uuid.uuid4().hex[:12]
-        payload = {"sids": [u["sid"] for u in selected], "group": group, "snapshot": db.meta("active_snapshot"), "corpus_hash": db.corpus_hash(), "contract_hash": cfg.contract_hash(), "versions": {u["sid"]: [u["source_sha"], u["source_hash"], u["version"]] for u in selected}, "source_words": words}
+        payload = claim_payload(cfg, db, group, selected, words)
         db.c.execute("INSERT INTO packets(id,stage,status,worker,payload,created) VALUES(?,?,'claimed',?,?,?)", (pid, stage, worker, json.dumps(payload), time.time()))
     prepare(cfg, db, pid)
     return {"claimed": pid, "stage": stage, "units": len(selected), "group": group, "source_words": words}

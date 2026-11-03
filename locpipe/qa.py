@@ -19,6 +19,17 @@ def plain(text):
     return TAG.sub("", text)
 
 
+def term_matches(term, source):
+    """Whether an approved glossary entry applies to a source string; check() and audits share it."""
+    flags = 0 if term.get("case_sensitive") else re.I
+    exact = term.get("source_match", "word") == "exact"
+    return any(
+        re.fullmatch(re.escape(form), source, flags) if exact
+        else re.search(r"(?<!\w)" + re.escape(form) + r"(?!\w)", source, flags)
+        for form in (term.get("forms_source") or [term["source"]])
+    )
+
+
 def check(source, target, *, kind="unclassified", glossary=(), max_length=None, ratio=1.6, target_culture=None):
     out = []
 
@@ -50,12 +61,7 @@ def check(source, target, *, kind="unclassified", glossary=(), max_length=None, 
         if source_match not in ("word", "exact"):
             add("glossary_configuration", "error", f"Invalid source_match for {term.get('id', term['source'])}: {source_match!r}")
             continue
-        matches_source = any(
-            re.fullmatch(re.escape(form), source, flags) if source_match == "exact"
-            else re.search(r"(?<!\w)" + re.escape(form) + r"(?!\w)", source, flags)
-            for form in source_forms
-        )
-        if matches_source:
+        if term_matches(term, source):
             forms = term.get("forms_target") or [term.get("target", "")]
             if term.get("do_not_translate"):
                 forms = source_forms
