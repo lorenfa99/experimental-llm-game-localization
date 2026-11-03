@@ -1,18 +1,14 @@
 # Contributing
 
-Contributions are welcome when they remain copyright-safe and deterministic.
+Use synthetic fixtures. Never commit game corpora, official references, game binaries,
+local settings, credentials or checkpoints. Keep linguistic generation in actual
+agent contexts and deterministic state/validation in Python.
 
-Please do not submit:
+For substantive code or adapter changes run `python -m unittest discover -s tests -v`
+and `python scripts/run_synthetic_demo.py`. Add tests for meaningful failure modes:
+stale versions, identity collisions, atomic rollback, recovery, independence input
+boundaries, source copies, unknown metadata and actual artifact readback.
 
-- extracted commercial game text or assets;
-- API keys, tokens, or private prompts containing proprietary data;
-- broad automatic translation replacements presented as QA;
-- validators whose runtime assumptions are not documented.
-
-For code changes:
-
-1. add or update standard-library unit tests;
-2. run `python -m unittest discover -s tests -v`;
-3. run the synthetic demo;
-4. document new schema assumptions and failure modes;
-5. keep linguistic generation outside deterministic validator code.
+Document implemented capabilities and unsupported formats honestly. Preserve stage
+requirements and owner authority. A proposed optimization should remove duplication
+while retaining full rule/context reads and genuine independent rereview.

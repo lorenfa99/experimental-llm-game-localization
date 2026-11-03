@@ -1,0 +1,8 @@
+{
+  "tool": "repak",
+  "version": "0.2.3",
+  "upstream": "https://github.com/trumank/repak",
+  "windows_url": "https://github.com/trumank/repak/releases/download/v0.2.3/repak_cli-x86_64-pc-windows-msvc.zip",
+  "windows_archive_sha256": "6720d602144d75df477a99d5bedb6ea780997546afc335901d4937cafeaa73fa",
+  "windows_exe_sha256": "fcd538e5994b9bb833622d425ae346f4e0692f02d4b0025114a559f9b6286022"
+}

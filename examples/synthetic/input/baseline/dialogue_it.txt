@@ -1,7 +1,0 @@
-INTRO_1|La vecchia città sogna da mille anni.|speaker=narrator
-INTRO_2|Ma stanotte qualcosa mescola sotto le sue strade.|speaker=narrator
-INTRO_3|E le campane rispondono dalle torri vuote.|speaker=narrator
-WARDEN_1|<<Esamini il cancello sigillato.>> Torna con 3 chiavi d'argento.|speaker=warden
-WARDEN_2|Torna quando sei pronto.|speaker=warden
-WARDEN_3|Torna quando sei pronto.|speaker=warden
-UI_KEYS|Chiavi trovate: {0}/3|screen=inventory

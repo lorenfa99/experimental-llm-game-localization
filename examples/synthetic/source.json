@@ -1,0 +1,12 @@
+{
+  "schema": "locpipe.source.v1",
+  "localization_target": "Game",
+  "source_culture": "en",
+  "note": "Invented engineering fixture; no game content.",
+  "units": [
+    {"namespace": "UI", "key": "confirm", "source": "Confirm {Key}", "kind": "ui", "wave": "ui", "group": "menu", "context": "A synthetic confirmation button; Key is supplied at runtime."},
+    {"namespace": "UI", "key": "return", "source": "Return", "kind": "ui", "wave": "ui", "group": "menu"},
+    {"namespace": "UI", "key": "blank", "source": "", "include": false},
+    {"namespace": "UI", "key": "number", "source": "42", "include": false}
+  ]
+}

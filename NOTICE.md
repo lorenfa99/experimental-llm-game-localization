@@ -1,17 +1,13 @@
-# Legal and data notice
+# Data and tool notice
 
-This repository contains methodology, prompts, synthetic examples, and
-general-purpose validation code. It does not include copyrighted game scripts,
-localization tables, textures, fonts, or packaged assets.
+This repository contains original methodology, reusable harness code, empty policy
+templates and synthetic fixtures. It contains no extracted commercial game text,
+official language resources, fonts, game packages or private project checkpoints.
 
-Users are responsible for:
+Owners are responsible for permissions and distribution policy for their game.
+Agent environments and any deliberately added model provider use their own terms.
+The harness itself sends no model requests and manages no model credentials.
 
-- checking the game's license and modding policy;
-- obtaining any permission required to translate or redistribute content;
-- keeping extracted proprietary material out of public repositories;
-- complying with the terms and privacy policies of any model provider;
-- reviewing every generated translation before release.
-
-The Dread Delusion case study documents process and aggregate results. Dread
-Delusion and related names belong to their respective owners. The case study
-does not imply endorsement.
+Queen's Domain is named as the source project for the generalized workflow. Game
+names belong to their respective owners; no developer affiliation is implied.
+See tools/THIRD-PARTY.md for optional third-party tooling.

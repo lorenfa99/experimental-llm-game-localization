@@ -1,0 +1,10 @@
+data/
+work/
+reports/
+build/
+backups/
+config.local.toml
+.env
+__pycache__/
+.venv/
+tools/downloads/
